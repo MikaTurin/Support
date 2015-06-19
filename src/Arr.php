@@ -20,7 +20,6 @@ class Arr
         }
 
         $key = is_array($key) ? $key : explode('.', $key);
-
         foreach ($key as $segment) {
             if (is_array($target)) {
                 if (!array_key_exists($segment, $target)) {
@@ -85,7 +84,7 @@ class Arr
      */
     public static function build($array, callable $callback)
     {
-        $results = [];
+        $results = array();
 
         foreach ($array as $key => $value) {
             list($innerKey, $innerValue) = call_user_func($callback, $key, $value);
@@ -104,7 +103,7 @@ class Arr
      */
     public static function collapse($array)
     {
-        $results = [];
+        $results = array();
 
         foreach ($array as $values) {
             if ($values instanceof Collection) {
@@ -137,7 +136,7 @@ class Arr
      */
     public static function dot($array, $prepend = '')
     {
-        $results = [];
+        $results = array();
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
@@ -204,7 +203,7 @@ class Arr
      */
     public static function flatten($array)
     {
-        $return = [];
+        $return = array();
 
         array_walk_recursive($array, function ($x) use (&$return) { $return[] = $x; });
 
@@ -319,7 +318,7 @@ class Arr
      */
     public static function pluck($array, $value, $key = null)
     {
-        $results = [];
+        $results = array();
 
         list($value, $key) = static::explodePluckParameters($value, $key);
 
@@ -399,7 +398,7 @@ class Arr
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
             if (!isset($array[$key]) || !is_array($array[$key])) {
-                $array[$key] = [];
+                $array[$key] = array();
             }
 
             $array = &$array[$key];
@@ -419,7 +418,7 @@ class Arr
      */
     public static function where($array, callable $callback)
     {
-        $filtered = [];
+        $filtered = array();
 
         foreach ($array as $key => $value) {
             if (call_user_func($callback, $key, $value)) {
